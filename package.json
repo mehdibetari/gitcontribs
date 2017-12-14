@@ -1,0 +1,28 @@
+{
+  "name": "gitcontrib",
+  "version": "1.0.0",
+  "description": "",
+  "main": "gitContribs.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mehdibetari/gitcontribs.git"
+  },
+  "author": "mehdibetari",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mehdibetari/gitcontribs/issues"
+  },
+  "homepage": "https://github.com/mehdibetari/gitcontribs#readme",
+  "dependencies": {
+    "asciify": "^1.3.5",
+    "async": "^2.6.0",
+    "cheerio": "^1.0.0-rc.2",
+    "colors": "^1.1.2",
+    "prompt": "^1.0.0",
+    "request": "^2.83.0",
+    "yargs": "^10.0.3"
+  }
+}
