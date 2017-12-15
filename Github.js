@@ -9,19 +9,26 @@ class Github {
     }
 
     getContribs(userName, callback) {
-        callback(userName);
-        request(this.GITHUB_BASE_URL+userName, function(error, response, html){
-            if (error) callback([]);
+        request(this.GITHUB_BASE_URL+userName, (error, response, html) => {
+            if (error) return callback([]);
             const $ = cheerio.load(html);
             let contribs = [];
-            $('rect').each((i) => {
-                let contrib = {};
-                contrib.count = $(this).attr('count');
-                contrib.date = $(this).attr('date');
-                contribs.push(contrib);
+            $('rect.day').each(function(i, elem) {
+                let contrib = $(this).data();
+                if (contrib.count > 0) {
+                    contribs.push(contrib);
+                }
             });
-            callback(contribs);
+            callback(this.formatContribs(contribs));
         });
+    }
+
+    formatContribs(contribs) {
+        let formatedContribs = {};
+        contribs.map((contrib) => {
+            formatedContribs[contrib.date] = contrib.count;
+        });
+        return formatedContribs;
     }
 }
 module.exports =  Github;
