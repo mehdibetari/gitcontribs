@@ -4,7 +4,9 @@
   "description": "",
   "main": "gitContribs.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "cli": "node cli.js",
+    "test": "mocha tests",
+    "watchtest": "mocha tests --watch"
   },
   "repository": {
     "type": "git",
@@ -23,6 +25,16 @@
     "colors": "^1.1.2",
     "prompt": "^1.0.0",
     "request": "^2.83.0",
-    "yargs": "^10.0.3"
+    "yargs": "^10.0.3",
+    "chai": "^4.1.2",
+    "chai-http": "^3.0.0",
+    "eslint": "^4.12.1",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-loader": "^1.9.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-node": "^5.2.1",
+    "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "mocha": "^4.0.1"
   }
 }
