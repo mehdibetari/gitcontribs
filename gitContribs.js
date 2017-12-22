@@ -1,5 +1,6 @@
 let fs              = require('fs');
 let async           = require('async');
+let _               = require('underscore');
 let argv            = require('yargs').argv;
 let colors          = require('colors');
 let prompt          = require('prompt');
@@ -29,22 +30,28 @@ class GitContribs {
                 prompt.get(['username'], (err, result) => {
                     if (err) return;
                     Gitlab.getContribs(result.username, (results) => {
-                        console.log(this.mergeContribs(results, response));
-                        console.log('first', results);
-                        console.log('second', response);
+                        let allContribss = this.mergeContribs(results, response);
+                        console.log('Github contrib:', this.sumOfContribs(response));
+                        console.log('Gitlab contrib:', this.sumOfContribs(results));
+                        console.log('All contrib:', this.sumOfContribs(allContribss));
                     });
                 });
             });
         });
     }
+    sumOfContribs (contribs) {
+        return Object.keys(contribs).reduce((previous, current) => previous + contribs[current], 0);
+    }
 
     mergeContribs (first, second) {
-        let contribs = Object.assign({}, first, second);
-        Object.keys(contribs).map((count, date) => {
-            contribs.date += first.date || 0;
+        let contribs = {};
+        let dates = _.uniq(Object.keys(first).concat(Object.keys(second)));
+        dates.forEach((date) => {
+            contribs[date] = (first[date] || 0) + (second[date] || 0);
         });
         return contribs;
     }
 }
 
 module.exports = GitContribs;
+//dzaporozhets
